@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#TheOG - Official Stream</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            /* Usando a tua imagem background.png */
+            background: #000 url('background.png') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        /* Overlay subtil para dar contraste mas manter a visibilidade da arte */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .player-card {
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            border: 2px solid #f3cf7a; /* Tom dourado inspirado no logo #TheOG */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #f3cf7a;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .sub-text {
+            color: #ddd;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            display: block;
+            font-weight: 300;
+        }
+
+        /* Estilização do Player */
+        audio {
+            width: 100%;
+            height: 45px;
+            filter: invert(85%) hue-rotate(150deg) brightness(1.2); 
+            outline: none;
+        }
+
+        .live-status {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: bold;
+            color: #4CAF50;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .dot {
+            height: 8px;
+            width: 8px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="player-card">
+        <h1>#TheOG</h1>
+        <span class="sub-text">EST. 1990s | IRC FOREVER</span>
+
+        <audio controls autoplay>
+            <source src="https://radios.justweb.pt/8074/stream" type="audio/mpeg">
+            O teu browser não suporta o stream.
+        </audio>
+
+        <div class="live-status">
+            <span class="dot"></span> ON AIR
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('click', () => {
+            const audio = document.querySelector('audio');
+            if (audio.paused) {
+                audio.play();
+            }
+        }, { once: true });
+    </script>
+
+</body>
+</html>
