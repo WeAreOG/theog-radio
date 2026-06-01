@@ -215,7 +215,7 @@
             cursor: default;
         }
 
-        /* Janela Flutuante (Modal) */
+        /* Janelas Flutuantes (Modals) */
         .modal-overlay {
             position: absolute;
             top: 0;
@@ -253,15 +253,6 @@
             position: relative;
         }
 
-        /* Scrollbar customizada para a caixa de texto se necessário */
-        .modal-box::-webkit-scrollbar {
-            width: 6px;
-        }
-        .modal-box::-webkit-scrollbar-thumb {
-            background: #f3cf7a;
-            border-radius: 10px;
-        }
-
         .modal-overlay.show .modal-box {
             transform: scale(1);
         }
@@ -284,6 +275,55 @@
             text-align: justify;
         }
 
+        /* Grelha de Utilizadores */
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .user-tag {
+            background: rgba(243, 207, 122, 0.05);
+            border: 1px solid rgba(243, 207, 122, 0.3);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .user-tag:hover {
+            background: #f3cf7a;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(243, 207, 122, 0.2);
+        }
+
+        /* Janela Flutuante de Imagem (Maior prioridade de Z-Index) */
+        #userImageModal {
+            z-index: 30;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .user-photo {
+            max-width: 100%;
+            max-height: 50vh;
+            border-radius: 15px;
+            border: 1px solid rgba(243, 207, 122, 0.5);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
+
         /* Botão Fechar Janela */
         .close-btn {
             background: transparent;
@@ -304,6 +344,15 @@
             background: #f3cf7a;
             color: #000;
         }
+
+        /* Scrollbar customizada para as caixas de texto */
+        .modal-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-box::-webkit-scrollbar-thumb {
+            background: #f3cf7a;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -319,7 +368,7 @@
         </div>
         <div class="menu-content">
             <div class="menu-item" onclick="openHistory()">Canal</div>
-            <a href="#users" class="menu-item">Users</a>
+            <div class="menu-item" onclick="openUsers()">Users</div>
             <a href="#forum" class="menu-item">Forum</a>
             <div class="menu-item disabled">Podcast (em breve)</div>
         </div>
@@ -341,7 +390,7 @@
         </div>
     </div>
 
-    <!-- Janela Flutuante (História do Canal) -->
+    <!-- Janela Flutuante 1: História do Canal -->
     <div class="modal-overlay" id="historyModal">
         <div class="modal-box">
             <h2>#TheOG</h2>
@@ -350,7 +399,52 @@
             <p>Já o biohazard descreve o canal como a sua <em>'segunda sala de estar'</em>. É ali que as segundas-feiras começam menos segunda-feira e mais sexta à noite improvisada. E no meio das conversas e gargalhadas, deixa o que realmente importa: <strong>'Gosto muito de vocês.'</strong></p>
             <p>Para a CutxiiiPoint, o #TheOG é um paradoxo bonito: um quarto escuro, mas iluminado. Não pelas paredes digitais, mas pelas pessoas — originais, improváveis, únicas. A nonamegirl vê o canal como tropeçar numa festa onde só conheces 'um amigo do amigo'… E o Emergency112 lembra-nos que, nesta margem digital, a amizade é farol.</p>
             <p>No fim de contas, o #TheOG não é só um canal de IRC. É sala de estar, é quarto iluminado, é festa improvisada, é farol aceso na madrugada. É caos. É carinho. É casa. E, no meio de tudo, somos nós. 💛</p>
-            <button class="close-btn" onclick="closeHistory()">Fechar</button>
+            <button class="close-btn" onclick="closeModal('historyModal')">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Janela Flutuante 2: Lista de Users -->
+    <div class="modal-overlay" id="usersModal">
+        <div class="modal-box">
+            <h2>Users do Canal</h2>
+            <div class="users-grid">
+                <div class="user-tag" onclick="openUserImage('anokas_pn', 'anokas_pn.png')">anokas_pn</div>
+                <div class="user-tag" onclick="openUserImage('biohazard', 'biohazard.png')">biohazard</div>
+                <div class="user-tag" onclick="openUserImage('Cutxiiipoint', 'Cutxiiipoint.jpg')">Cutxiiipoint</div>
+                <div class="user-tag" onclick="openUserImage('DarkUser', 'DarkUser.png')">DarkUser</div>
+                <div class="user-tag" onclick="openUserImage('Emergency112', 'Emergency112.png')">Emergency112</div>
+                <div class="user-tag" onclick="openUserImage('Garpa', 'Garpa.png')">Garpa</div>
+                <div class="user-tag" onclick="openUserImage('Ghola-V', 'Ghola-V.png')">Ghola-V</div>
+                <div class="user-tag" onclick="openUserImage('influencerDeNada', 'influencerDeNada.png')">influencerDeNada</div>
+                <div class="user-tag" onclick="openUserImage('Kosmos', 'Kosmos.png')">Kosmos</div>
+                <div class="user-tag" onclick="openUserImage('kryptonita', 'kryptonita.png')">kryptonita</div>
+                <div class="user-tag" onclick="openUserImage('LAVA', 'LAVA.jpeg')">LAVA</div>
+                <div class="user-tag" onclick="openUserImage('Mestre_da_Luz', 'Mestre_da_Luz.png')">Mestre_da_Luz</div>
+                <div class="user-tag" onclick="openUserImage('Nerdy', 'Nerdy.png')">Nerdy</div>
+                <div class="user-tag" onclick="openUserImage('nonamegirl', 'nonamegirlg.png')">nonamegirl</div>
+                <div class="user-tag" onclick="openUserImage('Padre', 'Padre.png')">Padre</div>
+                <div class="user-tag" onclick="openUserImage('Pinkcat', 'Pinkcat.png')">Pinkcat</div>
+                <div class="user-tag" onclick="openUserImage('Pisco', 'Pisco.png')">Pisco</div>
+                <div class="user-tag" onclick="openUserImage('Pris', 'Pris.png')">Pris</div>
+                <div class="user-tag" onclick="openUserImage('Prodigy', 'Prodigy.png')">Prodigy</div>
+                <div class="user-tag" onclick="openUserImage('quell', 'quell.png')">quell</div>
+                <div class="user-tag" onclick="openUserImage('Tartaruga', 'Tartaruga.png')">Tartaruga</div>
+                <div class="user-tag" onclick="openUserImage('TheOG', 'TheOG.png')">TheOG</div>
+                <div class="user-tag" onclick="openUserImage('ThePretender', 'ThePretender.png')">ThePretender</div>
+                <div class="user-tag" onclick="openUserImage('void', 'void.png')">void</div>
+            </div>
+            <button class="close-btn" onclick="closeModal('usersModal')">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Janela Flutuante 3: Imagem do Utilizador Oculta -->
+    <div class="modal-overlay" id="userImageModal">
+        <div class="modal-box" style="max-width: 400px;">
+            <h2 id="modalUserTitle">User</h2>
+            <div class="image-container">
+                <img src="" alt="User Photo" class="user-photo" id="modalUserImg">
+            </div>
+            <button class="close-btn" onclick="closeModal('userImageModal')">Voltar</button>
         </div>
     </div>
 
@@ -361,27 +455,42 @@
             menu.classList.toggle('active');
         }
 
-        // Abre a janela flutuante da história e fecha o menu
+        // Abre a janela da história
         function openHistory() {
             document.getElementById('historyModal').classList.add('show');
             document.getElementById('customMenu').classList.remove('active');
         }
 
-        // Fecha a janela flutuante
-        function closeHistory() {
-            document.getElementById('historyModal').classList.remove('show');
+        // Abre a janela de utilizadores
+        function openUsers() {
+            document.getElementById('usersModal').classList.add('show');
+            document.getElementById('customMenu').classList.remove('active');
         }
 
-        // Fecha a janela flutuante se clicar fora da caixa de texto
-        document.getElementById('historyModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeHistory();
-            }
+        // Abre a janela flutuante interna com a foto do respetivo utilziador
+        function openUserImage(name, filename) {
+            document.getElementById('modalUserTitle').innerText = name;
+            document.getElementById('modalUserImg').src = filename;
+            document.getElementById('userImageModal').classList.add('show');
+        }
+
+        // Fecha qualquer janela através do ID
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+
+        // Permite fechar as janelas ao clicar fora da caixa principal de conteúdo
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal(this.id);
+                }
+            });
         });
 
         // Ativação do áudio no primeiro clique na página
         window.addEventListener('click', (e) => {
-            if (e.target.closest('.menu-trigger') || e.target.closest('.menu-item')) return;
+            if (e.target.closest('.menu-trigger') || e.target.closest('.menu-item') || e.target.closest('.user-tag')) return;
             
             const audio = document.querySelector('audio');
             if (audio.paused) {
