@@ -67,7 +67,7 @@
             font-weight: 300;
         }
 
-        /* Crédito solicitado: by METROPOLITANA FM */
+        /* Crédito: by METROPOLITANA FM */
         .brand-text {
             color: #f3cf7a;
             font-size: 0.8rem;
@@ -120,7 +120,7 @@
             left: 30px;
             z-index: 10;
             display: flex;
-            flex-direction: column-reverse; /* Faz alinhar a partir de baixo */
+            flex-direction: column-reverse;
             align-items: flex-start;
         }
 
@@ -164,12 +164,12 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-            width: 160px;
+            width: 200px;
         }
 
         /* Quando o menu está ativo/aberto */
         .menu-container.active .menu-content {
-            max-height: 250px;
+            max-height: 300px;
             opacity: 1;
             border: 2px solid #f3cf7a;
         }
@@ -190,6 +190,7 @@
             text-transform: uppercase;
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(243, 207, 122, 0.2);
+            cursor: pointer;
         }
 
         .menu-item:last-child {
@@ -200,6 +201,108 @@
             background: rgba(243, 207, 122, 0.2);
             color: #f3cf7a;
             padding-left: 25px;
+        }
+
+        /* Item desativado/brevemente */
+        .menu-item.disabled {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        .menu-item.disabled:hover {
+            background: transparent;
+            color: #888;
+            padding-left: 20px;
+            cursor: default;
+        }
+
+        /* Janela Flutuante (Modal) */
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: rgba(15, 15, 15, 0.95);
+            border: 2px solid #f3cf7a;
+            border-radius: 25px;
+            padding: 35px;
+            max-width: 550px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        /* Scrollbar customizada para a caixa de texto se necessário */
+        .modal-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-box::-webkit-scrollbar-thumb {
+            background: #f3cf7a;
+            border-radius: 10px;
+        }
+
+        .modal-overlay.show .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-box h2 {
+            color: #f3cf7a;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            border-bottom: 1px solid rgba(243, 207, 122, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .modal-box p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Botão Fechar Janela */
+        .close-btn {
+            background: transparent;
+            border: 1px solid #f3cf7a;
+            color: #f3cf7a;
+            padding: 8px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .close-btn:hover {
+            background: #f3cf7a;
+            color: #000;
         }
     </style>
 </head>
@@ -215,9 +318,10 @@
             <div class="line"></div>
         </div>
         <div class="menu-content">
-            <a href="#canal" class="menu-item">Canal</a>
+            <div class="menu-item" onclick="openHistory()">Canal</div>
             <a href="#users" class="menu-item">Users</a>
             <a href="#forum" class="menu-item">Forum</a>
+            <div class="menu-item disabled">Podcast (em breve)</div>
         </div>
     </div>
 
@@ -237,17 +341,47 @@
         </div>
     </div>
 
+    <!-- Janela Flutuante (História do Canal) -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal-box">
+            <h2>#TheOG</h2>
+            <p>No meio da imensidão caótica da internet, existe um canto improvável chamado <strong>#TheOG</strong>. Um canal que, para uns, é abrigo; para outros, terapia gratuita; e para todos, um pequeno milagre digital. Onde o disparate e a amizade caminham de mãos dadas.</p>
+            <p>Para a Nininha, o canal é aquele lembrete reconfortante de que, nos dias cinzentos, há sempre <em>'macacos pior do que eu'</em>. No #TheOG, a tristeza pode até entrar… mas não fica muito tempo sem levar com uma piada.</p>
+            <p>Já o biohazard descreve o canal como a sua <em>'segunda sala de estar'</em>. É ali que as segundas-feiras começam menos segunda-feira e mais sexta à noite improvisada. E no meio das conversas e gargalhadas, deixa o que realmente importa: <strong>'Gosto muito de vocês.'</strong></p>
+            <p>Para a CutxiiiPoint, o #TheOG é um paradoxo bonito: um quarto escuro, mas iluminado. Não pelas paredes digitais, mas pelas pessoas — originais, improváveis, únicas. A nonamegirl vê o canal como tropeçar numa festa onde só conheces 'um amigo do amigo'… E o Emergency112 lembra-nos que, nesta margem digital, a amizade é farol.</p>
+            <p>No fim de contas, o #TheOG não é só um canal de IRC. É sala de estar, é quarto iluminado, é festa improvisada, é farol aceso na madrugada. É caos. É carinho. É casa. E, no meio de tudo, somos nós. 💛</p>
+            <button class="close-btn" onclick="closeHistory()">Fechar</button>
+        </div>
+    </div>
+
     <script>
-        // Função para abrir/fechar o menu para cima
+        // Controla o menu de três riscas
         function toggleMenu() {
             const menu = document.getElementById('customMenu');
             menu.classList.toggle('active');
         }
 
+        // Abre a janela flutuante da história e fecha o menu
+        function openHistory() {
+            document.getElementById('historyModal').classList.add('show');
+            document.getElementById('customMenu').classList.remove('active');
+        }
+
+        // Fecha a janela flutuante
+        function closeHistory() {
+            document.getElementById('historyModal').classList.remove('show');
+        }
+
+        // Fecha a janela flutuante se clicar fora da caixa de texto
+        document.getElementById('historyModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeHistory();
+            }
+        });
+
         // Ativação do áudio no primeiro clique na página
         window.addEventListener('click', (e) => {
-            // Evita ativar se clicar diretamente no botão do menu
-            if (e.target.closest('.menu-trigger')) return;
+            if (e.target.closest('.menu-trigger') || e.target.closest('.menu-item')) return;
             
             const audio = document.querySelector('audio');
             if (audio.paused) {
