@@ -225,7 +225,7 @@
 
         /* Texto de Copyright e Contacto */
         .footer-info {
-            color: rgba(255, 255, 255, 0.8);
+            color: #f3cf7a; /* Cor dourada aplicada a todo o bloco do rodapé */
             font-size: 0.85rem;
             letter-spacing: 1px;
             display: flex;
@@ -238,14 +238,14 @@
         }
 
         .footer-info .email-link {
-            color: #ffffff;
+            color: #f3cf7a; /* E-mail também em dourado */
             text-decoration: underline;
             cursor: pointer;
-            transition: color 0.2s ease;
+            transition: opacity 0.2s ease;
         }
 
         .footer-info .email-link:hover {
-            color: #f3cf7a;
+            opacity: 0.8;
         }
 
         /* Janelas Flutuantes (Modals) */
@@ -507,7 +507,6 @@
 
     <div class="overlay"></div>
 
-    <!-- Zona Inferior Esquerda (Menu + Info) -->
     <div class="bottom-left-zone">
         <div class="menu-container" id="customMenu">
             <div class="menu-trigger" onclick="toggleMenu()">
@@ -529,7 +528,6 @@
         </div>
     </div>
 
-    <!-- Player Inferior Direito -->
     <div class="player-card">
         <h1>#TheOG</h1>
         <span class="sub-text">EST. 1990s | IRC FOREVER</span>
@@ -545,11 +543,10 @@
         </div>
     </div>
 
-    <!-- Janela Flutuante 1: História do Canal -->
     <div class="modal-overlay" id="historyModal">
         <div class="modal-box">
             <h2>#TheOG</h2>
-            <p>No meio da imensidão caótica da internet, existe um canto improbable chamado <strong>#TheOG</strong>. Um canal que, para uns, é abrigo; para outros, terapia gratuita; e para todos, um pequeno milagre digital. Onde o disparate e a amizade caminham de mãos dadas.</p>
+            <p>No meio da imensidão caótica da internet, existe um canto improvável chamado <strong>#TheOG</strong>. Um canal que, para uns, é abrigo; para outros, terapia gratuita; e para todos, um pequeno milagre digital. Onde o disparate e a amizade caminham de mãos dadas.</p>
             <p>Para a Nininha, o canal é aquele lembrete reconfortante de que, nos dias cinzentos, há sempre <em>'macacos pior do que eu'</em>. No #TheOG, a tristeza pode até entrar… mas não fica muito tempo sem levar com uma piada.</p>
             <p>Já o biohazard descreve o canal como a sua <em>'segunda sala de estar'</em>. É ali que as segundas-feiras começam menos segunda-feira e mais sexta à noite improvisada. E no meio das conversas e gargalhadas, deixa o que realmente importa: <strong>'Gosto muito de vocês.'</strong></p>
             <p>Para a CutxiiiPoint, o #TheOG é um paradoxo bonito: um quarto escuro, mas iluminado. Não pelas paredes digitais, mas pelas pessoas — originais, improváveis, únicas. A nonamegirl vê o canal como tropeçar numa festa onde só conheces 'um amigo do amigo'… E o Emergency112 lembra-nos que, nesta margem digital, a amizade é farol.</p>
@@ -558,12 +555,10 @@
         </div>
     </div>
 
-    <!-- Janela Flutuante 2: Lista de Users com Páginas -->
     <div class="modal-overlay" id="usersModal">
         <div class="modal-box">
             <h2>Users do Canal</h2>
             
-            <!-- PÁGINA 1 -->
             <div class="users-page active" id="page1">
                 <div class="users-grid">
                     <div class="user-tag" onclick="openUserImage('anokas_pn', 'anokas_pn.png')">anokas_pn</div>
@@ -593,7 +588,6 @@
                 </div>
             </div>
 
-            <!-- PÁGINA 2 -->
             <div class="users-page" id="page2">
                 <div class="users-grid">
                     <div class="user-tag" onclick="openUserImage('Brownie', 'Brownie.png')">Brownie</div>
@@ -611,7 +605,6 @@
                 </div>
             </div>
 
-            <!-- Controlos de Paginação -->
             <div class="pagination-container">
                 <button class="page-btn hidden" id="prevBtn" onclick="changePage(1)">❮ Atrás</button>
                 <span class="page-indicator" id="pageIndicator">Página 1 de 2</span>
@@ -622,7 +615,6 @@
         </div>
     </div>
 
-    <!-- Janela Flutuante 3: Enviar Mensagem / Contacto -->
     <div class="modal-overlay" id="contactModal">
         <div class="modal-box" style="max-width: 480px;">
             <h2>Contactar #TheOG</h2>
@@ -647,7 +639,6 @@
         </div>
     </div>
 
-    <!-- Janela Flutuante 4: Imagem do Utilizador Oculta -->
     <div class="modal-overlay" id="userImageModal">
         <div class="modal-box" style="max-width: 400px;">
             <h2 id="modalUserTitle">User</h2>
@@ -723,14 +714,8 @@
         function handleFormSubmit(event) {
             event.preventDefault();
             const name = document.getElementById('formName').value;
-            const email = document.getElementById('formEmail').value;
-            const msg = document.getElementById('formMessage').value;
-
-            // Simulação de envio ou abertura do mail client local estruturado
             alert(`Obrigado ${name}! A tua mensagem foi estruturada para weareog@proton.me.`);
             closeModal('contactModal');
-            
-            // Limpa o formulário após fechar
             event.target.reset();
         }
 
@@ -756,5 +741,3 @@
 
 </body>
 </html>
-
-```
