@@ -14,18 +14,16 @@
         body {
             height: 100vh;
             width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #ffffff;
-            /* Usando a tua imagem background.png */
+            /* Imagem background.png */
             background: #000 url('background.png') no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
+            position: relative;
         }
 
-        /* Overlay subtil para dar contraste mas manter a visibilidade da arte */
+        /* Overlay para contraste */
         .overlay {
             position: absolute;
             top: 0;
@@ -36,55 +34,67 @@
             z-index: 1;
         }
 
+        /* Player posicionado no canto inferior direito */
         .player-card {
-            position: relative;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.75);
-            padding: 40px;
-            border-radius: 30px;
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 25px;
+            border-radius: 20px;
             text-align: center;
             backdrop-filter: blur(8px);
-            border: 2px solid #f3cf7a; /* Tom dourado inspirado no logo #TheOG */
+            border: 2px solid #f3cf7a;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-            width: 90%;
-            max-width: 400px;
+            width: 320px;
         }
 
         h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 2px;
             color: #f3cf7a;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .sub-text {
             color: #ddd;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
+            font-size: 0.75rem;
+            margin-bottom: 5px;
             display: block;
             font-weight: 300;
         }
 
-        /* Estilização do Player */
+        /* Crédito solicitado: by METROPOLITANA FM */
+        .brand-text {
+            color: #f3cf7a;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: block;
+            text-transform: uppercase;
+        }
+
         audio {
             width: 100%;
-            height: 45px;
+            height: 40px;
             filter: invert(85%) hue-rotate(150deg) brightness(1.2); 
             outline: none;
         }
 
         .live-status {
-            margin-top: 20px;
+            margin-top: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             font-weight: bold;
             color: #4CAF50;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 2px;
         }
 
@@ -102,15 +112,120 @@
             50% { opacity: 0.3; }
             100% { opacity: 1; }
         }
+
+        /* Menu no canto inferior esquerdo */
+        .menu-container {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column-reverse; /* Faz alinhar a partir de baixo */
+            align-items: flex-start;
+        }
+
+        /* Botão das 3 riscas (Hambúrguer) */
+        .menu-trigger {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #f3cf7a;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-trigger:hover {
+            transform: scale(1.05);
+        }
+
+        .line {
+            width: 22px;
+            height: 2px;
+            background-color: #f3cf7a;
+            transition: 0.3s;
+        }
+
+        /* Lista do Menu que abre para cima */
+        .menu-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            transition: max-height 0.4s ease, opacity 0.3s ease, border 0.1s;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            width: 160px;
+        }
+
+        /* Quando o menu está ativo/aberto */
+        .menu-container.active .menu-content {
+            max-height: 250px;
+            opacity: 1;
+            border: 2px solid #f3cf7a;
+        }
+
+        /* Efeito visual nas 3 riscas quando aberto */
+        .menu-container.active .line:nth-child(1) { transform: rotate(-45deg) translate(-5px, 5px); }
+        .menu-container.active .line:nth-child(2) { opacity: 0; }
+        .menu-container.active .line:nth-child(3) { transform: rotate(45deg) translate(-5px, -5px); }
+
+        /* Itens do Menu */
+        .menu-item {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(243, 207, 122, 0.2);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background: rgba(243, 207, 122, 0.2);
+            color: #f3cf7a;
+            padding-left: 25px;
+        }
     </style>
 </head>
 <body>
 
     <div class="overlay"></div>
 
+    <!-- Menu Inferior Esquerdo -->
+    <div class="menu-container" id="customMenu">
+        <div class="menu-trigger" onclick="toggleMenu()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <div class="menu-content">
+            <a href="#canal" class="menu-item">Canal</a>
+            <a href="#users" class="menu-item">Users</a>
+            <a href="#forum" class="menu-item">Forum</a>
+        </div>
+    </div>
+
+    <!-- Player Inferior Direito -->
     <div class="player-card">
         <h1>#TheOG</h1>
         <span class="sub-text">EST. 1990s | IRC FOREVER</span>
+        <span class="brand-text">by METROPOLITANA FM</span>
 
         <audio controls autoplay>
             <source src="https://radios.justweb.pt/8074/stream" type="audio/mpeg">
@@ -123,7 +238,17 @@
     </div>
 
     <script>
-        window.addEventListener('click', () => {
+        // Função para abrir/fechar o menu para cima
+        function toggleMenu() {
+            const menu = document.getElementById('customMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Ativação do áudio no primeiro clique na página
+        window.addEventListener('click', (e) => {
+            // Evita ativar se clicar diretamente no botão do menu
+            if (e.target.closest('.menu-trigger')) return;
+            
             const audio = document.querySelector('audio');
             if (audio.paused) {
                 audio.play();
