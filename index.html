@@ -16,36 +16,11 @@
             width: 100vw;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #ffffff;
-            /* Imagem background.png */
+            /* Imagem background.png - Certifica-te que o ficheiro existe */
             background: #000 url('background.png') no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
             position: relative;
-        }
-
-        /* Mensagem de homenagem no topo (Efeito Névoa) */
-        .memorial-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
-            padding: 15px 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            color: rgba(255, 255, 255, 0.75);
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-            z-index: 15;
-            text-transform: uppercase;
-            pointer-events: none;
-            animation: fogFade 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes fogFade {
-            0% { opacity: 0.8; }
-            100% { opacity: 0.5; }
         }
 
         /* Overlay para contraste */
@@ -58,6 +33,81 @@
             background: rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
+
+        /* --- Nova Estrela Pulsante ThePretender --- */
+        .pretender-star {
+            position: absolute;
+            /* Posição no ecrã - podes ajustar estes valores */
+            top: 20%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            z-index: 5; /* Atrás do player e menus, mas à frente do overlay básico */
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pretender-star:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* O elemento visual da "estrela" */
+        .star-core {
+            width: 15px;
+            height: 15px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+            /* Animações: Pulsar tamanho e Mudar cor arco-íris */
+            animation: starPulse 2s infinite ease-in-out, starRainbow 5s infinite linear;
+        }
+
+        /* O texto do nome */
+        .star-text {
+            margin-top: 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 5px rgba(0,0,0,0.8);
+            /* Animação para acompanhar a cor da estrela */
+            animation: starRainbowText 5s infinite linear;
+        }
+
+        /* Animação de Pulsar Tamanho */
+        @keyframes starPulse {
+            0% { transform: scale(1); opacity: 0.8; box-shadow: 0 0 10px #fff; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 20px #fff, 0 0 30px #f3cf7a; }
+            100% { transform: scale(1); opacity: 0.8; box-shadow: 0 0 10px #fff; }
+        }
+
+        /* Animação de Cor Arco-Íris (Ciclo) */
+        @keyframes starRainbow {
+            0%   { background-color: #ff0000; box-shadow: 0 0 15px #ff0000; } /* Vermelho */
+            16%  { background-color: #ff7f00; box-shadow: 0 0 15px #ff7f00; } /* Laranja */
+            33%  { background-color: #ffff00; box-shadow: 0 0 15px #ffff00; } /* Amarelo */
+            50%  { background-color: #00ff00; box-shadow: 0 0 15px #00ff00; } /* Verde */
+            66%  { background-color: #0000ff; box-shadow: 0 0 15px #0000ff; } /* Azul */
+            83%  { background-color: #4b0082; box-shadow: 0 0 15px #4b0082; } /* Índigo */
+            100% { background-color: #9400d3; box-shadow: 0 0 15px #9400d3; } /* Violeta */
+        }
+
+        /* Animação de Cor Arco-Íris para o Texto */
+        @keyframes starRainbowText {
+            0%   { color: #ffcccc; text-shadow: 0 0 5px #ff0000; }
+            16%  { color: #ffe5cc; text-shadow: 0 0 5px #ff7f00; }
+            33%  { color: #ffffcc; text-shadow: 0 0 5px #ffff00; }
+            50%  { color: #ccffcc; text-shadow: 0 0 5px #00ff00; }
+            66%  { color: #ccccff; text-shadow: 0 0 5px #0000ff; }
+            83%  { color: #e0ccff; text-shadow: 0 0 5px #4b0082; }
+            100% { color: #f2ccff; text-shadow: 0 0 5px #9400d3; }
+        }
+        /* ------------------------------------------- */
 
         /* Player posicionado no canto inferior direito */
         .player-card {
@@ -333,6 +383,14 @@
             text-align: justify;
         }
 
+        /* Estilo específico para a mensagem do Pretender */
+        .tribute-text {
+            font-style: italic;
+            border-left: 3px solid #f3cf7a;
+            padding-left: 15px;
+            color: #f3cf7a !important; /* Força a cor dourada */
+        }
+
         /* Formulário de Contacto */
         .contact-form {
             display: flex;
@@ -530,10 +588,13 @@
 </head>
 <body>
 
-    <!-- Mensagem de Homenagem (Efeito Névoa) -->
-    <div class="memorial-bar">Descansa em Paz ThePretender - 8/06/2026</div>
-
     <div class="overlay"></div>
+
+    <!-- --- Nova Estrela Pulsante ThePretender no Fundo --- -->
+    <div class="pretender-star" onclick="openPretenderTribute()">
+        <div class="star-core"></div>
+        <div class="star-text">ThePretender</div>
+    </div>
 
     <div class="bottom-left-zone">
         <div class="menu-container" id="customMenu">
@@ -561,7 +622,8 @@
         <span class="sub-text">EST. 1990s | IRC FOREVER</span>
         <span class="brand-text">by METROPOLITANA FM</span>
 
-        <audio controls autoplay>
+        <!-- Certifica-te que o link do stream está funcional -->
+        <audio id="mainAudio" controls autoplay>
             <source src="https://radios.justweb.pt/8074/stream" type="audio/mpeg">
             O teu browser não suporta o stream.
         </audio>
@@ -571,6 +633,7 @@
         </div>
     </div>
 
+    <!-- Janela: História -->
     <div class="modal-overlay" id="historyModal">
         <div class="modal-box">
             <h2>#TheOG</h2>
@@ -583,12 +646,14 @@
         </div>
     </div>
 
+    <!-- Janela: Users -->
     <div class="modal-overlay" id="usersModal">
         <div class="modal-box">
             <h2>Users do Canal</h2>
             
             <div class="users-page active" id="page1">
                 <div class="users-grid">
+                    <!-- Users mantidos, mas removi o ThePretender da lista normal, pois agora ele é a estrela -->
                     <div class="user-tag" onclick="openUserImage('anokas_pn', 'anokas_pn.png')">anokas_pn</div>
                     <div class="user-tag" onclick="openUserImage('biohazard', 'biohazard.png')">biohazard</div>
                     <div class="user-tag" onclick="openUserImage('Cutxiiipoint', 'Cutxiiipoint.jpg')">Cutxiiipoint</div>
@@ -611,7 +676,7 @@
                     <div class="user-tag" onclick="openUserImage('quell', 'quell.png')">quell</div>
                     <div class="user-tag" onclick="openUserImage('Tartaruga', 'Tartaruga.png')">Tartaruga</div>
                     <div class="user-tag" onclick="openUserImage('TheOG', 'TheOG.png')">TheOG</div>
-                    <div class="user-tag" onclick="openUserImage('ThePretender', 'ThePretender.png')">ThePretender</div>
+                    <!-- ThePretender removido daqui -->
                     <div class="user-tag" onclick="openUserImage('void', 'void.png')">void</div>
                 </div>
             </div>
@@ -643,6 +708,7 @@
         </div>
     </div>
 
+    <!-- Janela: Contacto -->
     <div class="modal-overlay" id="contactModal">
         <div class="modal-box" style="max-width: 480px;">
             <h2>Contactar #TheOG</h2>
@@ -667,6 +733,7 @@
         </div>
     </div>
 
+    <!-- Janela: Foto do User -->
     <div class="modal-overlay" id="userImageModal">
         <div class="modal-box" style="max-width: 400px;">
             <h2 id="modalUserTitle">User</h2>
@@ -674,6 +741,15 @@
                 <img src="" alt="User Photo" class="user-photo" id="modalUserImg">
             </div>
             <button class="close-btn" onclick="closeModal('userImageModal')">Voltar</button>
+        </div>
+    </div>
+
+    <!-- --- Nova Janela: Homenagem ThePretender --- -->
+    <div class="modal-overlay" id="pretenderTributeModal">
+        <div class="modal-box">
+            <h2>ThePretender</h2>
+            <p class="tribute-text">"A sua partida não foi um fim, mas uma travessia voluntária para o lado onde os segredos do universo lhe dão, por fim, razão. V! 8-6-2026"</p>
+            <button class="close-btn" onclick="closeModal('pretenderTributeModal')">Fechar</button>
         </div>
     </div>
 
@@ -703,6 +779,13 @@
             document.getElementById('customMenu').classList.remove('active');
         }
 
+        // --- Nova Função: Abre a Homenagem ---
+        function openPretenderTribute() {
+            document.getElementById('pretenderTributeModal').classList.add('show');
+            // Fecha o menu caso esteja aberto
+            document.getElementById('customMenu').classList.remove('active');
+        }
+
         // Altera entre a Página 1 e Página 2 da lista de utilizadores
         function changePage(pageNum) {
             const p1 = document.getElementById('page1');
@@ -729,6 +812,7 @@
         // Abre a janela flutuante interna com a foto do respetivo utilizador
         function openUserImage(name, filename) {
             document.getElementById('modalUserTitle').innerText = name;
+            // Certifica-te que os ficheiros de imagem existem
             document.getElementById('modalUserImg').src = filename;
             document.getElementById('userImageModal').classList.add('show');
         }
@@ -756,15 +840,21 @@
             });
         });
 
-        // Ativação do áudio no primeiro clique na página
+        // Ativação do áudio no primeiro clique na página (necessário para browsers modernos)
         window.addEventListener('click', (e) => {
-            if (e.target.closest('.menu-trigger') || e.target.closest('.menu-item') || e.target.closest('.user-tag') || e.target.closest('.page-btn') || e.target.closest('.email-link') || e.target.closest('.modal-box')) return;
+            // Lista de classes que NÃO devem ativar o áudio automaticamente (para não atrapalhar a interação)
+            const ignoreClasses = ['.menu-trigger', '.menu-item', '.user-tag', '.page-btn', '.email-link', '.modal-box', '.pretender-star'];
             
-            const audio = document.querySelector('audio');
-            if (audio.paused) {
-                audio.play();
+            // Verifica se o clique foi em algum elemento ignorado
+            const shouldIgnore = ignoreClasses.some(className => e.target.closest(className));
+            if (shouldIgnore) return;
+            
+            const audio = document.getElementById('mainAudio');
+            if (audio && audio.paused) {
+                // Tenta dar play. Pode falhar se o stream não carregar.
+                audio.play().catch(error => console.log("Autoplay bloqueado ou erro no stream:", error));
             }
-        }, { once: true });
+        }, { once: true }); // Executa apenas uma vez
     </script>
 
 </body>
