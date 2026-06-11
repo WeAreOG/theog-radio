@@ -23,6 +23,31 @@
             position: relative;
         }
 
+        /* Mensagem de homenagem no topo (Efeito Névoa) */
+        .memorial-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.75);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+            z-index: 15;
+            text-transform: uppercase;
+            pointer-events: none;
+            animation: fogFade 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes fogFade {
+            0% { opacity: 0.8; }
+            100% { opacity: 0.5; }
+        }
+
         /* Overlay para contraste */
         .overlay {
             position: absolute;
@@ -505,6 +530,9 @@
 </head>
 <body>
 
+    <!-- Mensagem de Homenagem (Efeito Névoa) -->
+    <div class="memorial-bar">Descansa em Paz ThePretender - 8/06/2026</div>
+
     <div class="overlay"></div>
 
     <div class="bottom-left-zone">
@@ -547,7 +575,7 @@
         <div class="modal-box">
             <h2>#TheOG</h2>
             <p>No meio da imensidão caótica da internet, existe um canto improvável chamado <strong>#TheOG</strong>. Um canal que, para uns, é abrigo; para outros, terapia gratuita; e para todos, um pequeno milagre digital. Onde o disparate e a amizade caminham de mãos dadas.</p>
-            <p>Para a Nininha, o canal é aquele lembrete reconfortante de que, nos dias cinzentos, há sempre <em>'macacos pior do que eu'</em>. No #TheOG, a tristeza pode até entrar… mas não fica muito tempo sem levar com uma piada.</p>
+            <p>Para a Nininha, o canal é aquele lembrete reconfortante de que, nos dias cinzentos, hay sempre <em>'macacos pior do que eu'</em>. No #TheOG, a tristeza pode até entrar… mas não fica muito tempo sem levar com uma piada.</p>
             <p>Já o biohazard descreve o canal como a sua <em>'segunda sala de estar'</em>. É ali que as segundas-feiras começam menos segunda-feira e mais sexta à noite improvisada. E no meio das conversas e gargalhadas, deixa o que realmente importa: <strong>'Gosto muito de vocês.'</strong></p>
             <p>Para a CutxiiiPoint, o #TheOG é um paradoxo bonito: um quarto escuro, mas iluminado. Não pelas paredes digitais, mas pelas pessoas — originais, improváveis, únicas. A nonamegirl vê o canal como tropeçar numa festa onde só conheces 'um amigo do amigo'… E o Emergency112 lembra-nos que, nesta margem digital, a amizade é farol.</p>
             <p>No fim de contas, o #TheOG não é só um canal de IRC. É sala de estar, é quarto iluminado, é festa improvisada, é farol aceso na madrugada. É caos. É carinho. É casa. E, no meio de tudo, somos nós. 💛</p>
