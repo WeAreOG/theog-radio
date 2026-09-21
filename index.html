@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
@@ -188,7 +189,7 @@
             100% { opacity: 1; }
         }
 
-        /* Zona Inferior Esquerda: Menu + Rodapé */
+        /* Zona Inferior Esquerda: Menu + Rodapé pessoal */
         .bottom-left-zone {
             position: absolute;
             bottom: 30px;
@@ -298,9 +299,9 @@
             cursor: default;
         }
 
-        /* Texto de Copyright e Contacto */
+        /* Texto de Copyright e Contacto (rodapé pequeno junto ao menu) */
         .footer-info {
-            color: #f3cf7a; /* Cor dourada aplicada a todo o bloco do rodapé */
+            color: #f3cf7a;
             font-size: 0.85rem;
             letter-spacing: 1px;
             display: flex;
@@ -313,13 +314,40 @@
         }
 
         .footer-info .email-link {
-            color: #f3cf7a; /* E-mail também em dourado */
+            color: #f3cf7a;
             text-decoration: underline;
             cursor: pointer;
             transition: opacity 0.2s ease;
         }
 
         .footer-info .email-link:hover {
+            opacity: 0.8;
+        }
+
+        /* --- Rodapé (footer) fixo no fundo da página, pedido pelo GitHub --- */
+        .site-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 8; /* acima do overlay/background, abaixo dos modals (20+) */
+            background: rgba(0, 0, 0, 0.85);
+            border-top: 1px solid rgba(243, 207, 122, 0.3);
+            padding: 8px 20px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #f3cf7a;
+            backdrop-filter: blur(6px);
+        }
+
+        .site-footer a {
+            color: #f3cf7a;
+            text-decoration: underline;
+            cursor: pointer;
+            margin: 0 8px;
+        }
+
+        .site-footer a:hover {
             opacity: 0.8;
         }
 
@@ -653,7 +681,6 @@
             
             <div class="users-page active" id="page1">
                 <div class="users-grid">
-                    <!-- Users mantidos, mas removi o ThePretender da lista normal, pois agora ele é a estrela -->
                     <div class="user-tag" onclick="openUserImage('anokas_pn', 'anokas_pn.png')">anokas_pn</div>
                     <div class="user-tag" onclick="openUserImage('biohazard', 'biohazard.png')">biohazard</div>
                     <div class="user-tag" onclick="openUserImage('Cutxiiipoint', 'Cutxiiipoint.jpg')">Cutxiiipoint</div>
@@ -676,7 +703,6 @@
                     <div class="user-tag" onclick="openUserImage('quell', 'quell.png')">quell</div>
                     <div class="user-tag" onclick="openUserImage('Tartaruga', 'Tartaruga.png')">Tartaruga</div>
                     <div class="user-tag" onclick="openUserImage('TheOG', 'TheOG.png')">TheOG</div>
-                    <!-- ThePretender removido daqui -->
                     <div class="user-tag" onclick="openUserImage('void', 'void.png')">void</div>
                 </div>
             </div>
@@ -753,6 +779,23 @@
         </div>
     </div>
 
+    <!-- Janela: Política de Privacidade (necessária para o link do footer) -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="modal-box">
+            <h2>Política de Privacidade</h2>
+            <p>Este site não recolhe dados pessoais para além dos que enviares voluntariamente através do formulário de contacto (nome, e-mail e mensagem), que são usados apenas para te responder.</p>
+            <p>Não usamos cookies de terceiros nem partilhamos os teus dados com ninguém.</p>
+            <button class="close-btn" onclick="closeModal('privacyModal')">Fechar</button>
+        </div>
+    </div>
+
+    <!-- --- Rodapé (Footer) do site --- -->
+    <footer class="site-footer">
+        &copy; 2026 #TheOG. Todos os direitos reservados.
+        <a href="#" onclick="openPrivacy(event)">Política de Privacidade</a>
+        <a href="#" onclick="openContact(event)">Contacto</a>
+    </footer>
+
     <script>
         // Controla o menu de três riscas
         function toggleMenu() {
@@ -774,9 +817,16 @@
         }
 
         // Abre a janela de contacto
-        function openContact() {
+        function openContact(event) {
+            if (event) event.preventDefault();
             document.getElementById('contactModal').classList.add('show');
             document.getElementById('customMenu').classList.remove('active');
+        }
+
+        // Abre a janela de política de privacidade
+        function openPrivacy(event) {
+            if (event) event.preventDefault();
+            document.getElementById('privacyModal').classList.add('show');
         }
 
         // --- Nova Função: Abre a Homenagem ---
@@ -843,7 +893,7 @@
         // Ativação do áudio no primeiro clique na página (necessário para browsers modernos)
         window.addEventListener('click', (e) => {
             // Lista de classes que NÃO devem ativar o áudio automaticamente (para não atrapalhar a interação)
-            const ignoreClasses = ['.menu-trigger', '.menu-item', '.user-tag', '.page-btn', '.email-link', '.modal-box', '.pretender-star'];
+            const ignoreClasses = ['.menu-trigger', '.menu-item', '.user-tag', '.page-btn', '.email-link', '.modal-box', '.pretender-star', '.site-footer'];
             
             // Verifica se o clique foi em algum elemento ignorado
             const shouldIgnore = ignoreClasses.some(className => e.target.closest(className));
@@ -856,15 +906,6 @@
             }
         }, { once: true }); // Executa apenas uma vez
     </script>
-    <footer class="bg-gray-900 text-white py-6 mt-12">
-    <div class="container mx-auto px-4 text-center">
-        <p>&copy; 2026 O teu nome ou projeto. Todos os direitos reservados.</p>
-        <div class="mt-4 flex justify-center space-x-6">
-            <a href="#" class="hover:text-gray-400">Política de Privacidade</a>
-            <a href="#" onclick="openContactModal(event)" class="hover:text-gray-400">Contacto</a>
-        </div>
-    </div>
-</footer>
 
 </body>
 </html>
